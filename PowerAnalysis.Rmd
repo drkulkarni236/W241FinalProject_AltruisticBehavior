@@ -1,0 +1,79 @@
+---
+title: "Power Analysis"
+author: "Ryan Wilson, Sumedh Shah, Devashish Kulkarni"
+date: "09/29/2022"
+output: 
+  pdf_document: 
+    number_sections: true
+---
+```{r global options, include = FALSE}
+knitr::opts_chunk$set(include = FALSE, message = FALSE, warning = FALSE, tidy.opts = list(width.cutoff = 60), tidy = TRUE )
+
+knitr::knit_engines$set(problem_description = function(options) {
+  code <- paste(options$code, collapse = "\n")
+})
+```
+
+```{r package loads, warning=FALSE, message=FALSE}
+library(data.table)
+library(sandwich)
+library(lmtest)
+
+library(ggplot2)
+library(knitr)
+
+set.seed(42)
+```
+
+# Introduction
+
+For our experiment, we plan to recruit participants from Amazon mTurk to solve 1 puzzle for a financial reward. After the puzzle is solved successfully, we will ask them to complete additional optional puzzles, with variation in the text of the request. For example, one set of instructions would mention a specific benefit for others to solving the puzzle (e.g. researchers are building a math course for disadvantaged children in grade 8-10), while another set would not specify this information. Our outcome would the number of puzzle solved by participants in each group, with a maximum 5 puzzles. We plan to collect information on age, gender and ethnicity as covariates. The number of puzzles solved would be an integer from 0-5. Age will be measured in one of 5 buckets (<20, 20-35, 36-50, 50-65, >65), gender will take one of 3 values (Male, Female, Other) and ethnicity will take one of 5 values (White, Black, Asian, Hispanic, Other). [\textcolor{blue}{Previous research}][1] on users on Amazon mTurk is used to simulate the distribution of the covariates. A [\textcolor{blue}{previous field experiment}][2] on charitable giving in a Salvation army store found that a verbal request for a donation increased the number of donors by 55% and the total donations by 69% as compared to a silent opportunity to donate, without a verbal request. Considering both these numbers and keeping in mind the difference in setting, our conservative estimate for the outcomes is 1 puzzle solved on average by the control group (i.e. the minimum required for the reward) and 2 puzzles solved on average by the treatment group. Our three scenarios would test for different effect sizes and dispersion in data.
+
+
+# Senarios
+
+## 
+* Control group: 10% fails to solve the the first puzzle, 80% solve only 1 puzzle, 10% solve 2 puzzles.
+* Treatment group: 10% fails to solve the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles.
+* No correlation between any covariates on the outcome.
+
+```{r senario 1, include=TRUE}
+
+rows <- 1000 
+
+d <- data.table(id = 1:rows) 
+
+# Create treatment assignment
+d[ , ':='(treat = sample(c(0,1), .N, replace = TRUE))]
+
+# Create control outcomes
+d[treat == 0,  outcome := sample(c(0, 1, 2), size = .N, replace = TRUE, prob = c(.1, 0.8, 0.1))]
+
+# Create treatment outcome
+d[treat == 1,  outcome := sample(c(0, 1, 2, 3), size = .N, replace = TRUE, prob = c(.1, 0.4, 0.4, 0.1))]
+
+# Create gender covariate (55% female, 40% male, 5% other)
+d[ ,  gender := sample(c('M', 'F', 'O'), size = .N, replace = TRUE, prob = c(0.55, 0.40, 0.05))]
+
+# Create Age covariate, values from 1-5: 
+# 1 -> <20 | 2 -> 20-35 | 3 -> 36-50 | 4 -> 50-65 | 5-> >65
+# Probability estimates from the reference
+d[ ,  age := sample(c(1, 2, 3, 4, 5), size = .N, replace = TRUE, prob = c(.3, .37, .17, .11, .05))]
+
+# Create Ethnicity covariate: 
+# W -> White, B -> Black, A -> Asian, H -> Hispanic, O -> Other
+# Probability estimates from the reference
+d[ ,  ethnicity := sample(c('W', 'B', 'A', 'H', 'O'), size = .N, replace = TRUE, prob = c(.7, .07, .1, .1, .03))]
+
+```
+
+## Test
+
+
+
+
+
+
+[1]: https://www.cloudresearch.com/resources/blog/who-uses-amazon-mturk-2020-demographics/#:~:text=Age%20%26%20Generation&text=As%20shown%20in%20Figure%202,U.S.%20population%20as%20a%20whole
+
+[2]: \textcolor{blue}
