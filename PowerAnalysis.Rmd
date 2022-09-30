@@ -81,7 +81,7 @@ percentages_to_sample <- seq(1,10,by=1)
 sample_sizes = ceiling(percentages_to_sample/100*nrow(d)/2)
 power_sample_size_1 <- NA
 
-n_loops = 100
+n_loops = 1000
 count = 0
 
 for(sample_size in sample_sizes){
