@@ -124,4 +124,11 @@ plot(sample_sizes*2, power_sample_size_1, xlab="Sample Size", ylab="Power")
 
 [1]: https://www.cloudresearch.com/resources/blog/who-uses-amazon-mturk-2020-demographics/#:~:text=Age%20%26%20Generation&text=As%20shown%20in%20Figure%202,U.S.%20population%20as%20a%20whole
 
-[2]: \textcolor{blue}
+[2]: https://www.nber.org/system/files/working_papers/w17648/w17648.pdf
+
+
+References
+
+[1] - https://www.cloudresearch.com/resources/blog/who-uses-amazon-mturk-2020-demographics/#:~:text=Age%20%26%20Generation&text=As%20shown%20in%20Figure%202,U.S.%20population%20as%20a%20whole
+
+[2] - https://www.nber.org/system/files/working_papers/w17648/w17648.pdf
