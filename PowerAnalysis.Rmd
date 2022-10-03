@@ -31,7 +31,7 @@ set.seed(42)
 For our experiment, we plan to recruit participants from Amazon mTurk to solve 1 puzzle for a financial reward. After the puzzle is solved successfully, we will ask them to complete additional optional puzzles, with variation in the text of the request. For example, one set of instructions would mention a specific benefit for others to solving the puzzle (e.g. researchers are building a math course for disadvantaged children in grade 8-10), while another set would not specify this information. Our outcome would the number of puzzle solved by participants in each group, with a maximum 5 puzzles. We plan to collect information on age, gender and ethnicity as covariates. The number of puzzles solved would be an integer from 0-5. Age will be measured in one of 5 buckets (<20, 20-35, 36-50, 50-65, >65), gender will take one of 3 values (Male, Female, Other) and ethnicity will take one of 5 values (White, Black, Asian, Hispanic, Other). [\textcolor{blue}{Previous research}][1] on users on Amazon mTurk is used to simulate the distribution of the covariates. A [\textcolor{blue}{previous field experiment}][2] on charitable giving in a Salvation army store found that a verbal request for a donation increased the number of donors by 55% and the total donations by 69% as compared to a silent opportunity to donate, without a verbal request. Considering both these numbers and keeping in mind and the difference in setting, our conservative estimate for the outcomes is 1 puzzle solved on average by the control group (i.e. the minimum required for the reward) and 1.5 puzzles solved on average by the treatment group. Our three scenarios would test for different effect sizes and dispersion in data. We generate a dataset with 1000 observations. Various samples of different sample sizes are sampled from this population. The sampling process is repeated 1000 times.  Regression is used to fit a model on the outcome with only the treatment assignment as the regressor for each sample. The p-values generated from this regression are used to calculate power by counting the fraction of p-values < 0.05.
 
 
-# Senarios
+# Scenarios
 
 ## Low effect size (0.5), low dispersion
 * Control group: 10% fails to solve the the first puzzle, 80% solve only 1 puzzle, 10% solve 2 puzzles.
@@ -146,11 +146,11 @@ for(sample_size in sample_sizes){
 }
 
 df <- data.frame(sample_sizes*2, power_sample_size_1, power_sample_size_2)
-colors <- c("Senario 1" = "blue", "Senario 2" = "red", "Senario 3" = "green")
+colors <- c("Scenario 1" = "blue", "Scenario 2" = "red", "Scenario 3" = "green")
 ggplot(df, aes(x = sample_sizes*2)) +
-  geom_line(aes(y = power_sample_size_1, color = "Senario 1")) +
-  geom_line(aes(y = power_sample_size_2, color = "Senario 2")) +
-  geom_line(aes(y = power_sample_size_3, color = "Senario 3")) +
+  geom_line(aes(y = power_sample_size_1, color = "Scenario 1")) +
+  geom_line(aes(y = power_sample_size_2, color = "Scenario 2")) +
+  geom_line(aes(y = power_sample_size_3, color = "Scenario 3")) +
   labs(x = "Sample Size",
          y = "Power",
          color = "Legend") +
