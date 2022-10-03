@@ -34,19 +34,19 @@ For our experiment, we plan to recruit participants from Amazon mTurk to solve 1
 # Scenarios
 
 ## Low effect size (0.5), low dispersion
-* Control group: 10% fails to solve the the first puzzle, 80% solve only 1 puzzle, 10% solve 2 puzzles.
-* Treatment group: 10% fails to solve the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles.
+* Control group: 10% fails to solve the the first puzzle, 80% solve only 1 puzzle, 10% solve 2 puzzles. (mean = 1)
+* Treatment group: 10% fails to solve the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles. (mean = 1.5)
 * No correlation between any covariates on the outcome.
 
 ## Low effect size (0.5), high dispersion
-* Control group: 10% fails to solve the the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles.
-* Treatment group: 10% fails to solve the first puzzle, 20% solve only 1 puzzle, 40% solve 2 puzzles, 20% solve 3 puzzles, 10% solve 4 puzzles.
+* Control group: 10% fails to solve the the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles. (mean = 1.5)
+* Treatment group: 10% fails to solve the first puzzle, 20% solve only 1 puzzle, 40% solve 2 puzzles, 20% solve 3 puzzles, 10% solve 4 puzzles. (mean = 2)
 * No correlation between any covariates on the outcome.
 
 ## High effect size (1.5), high dispersion
-* Control group: 10% fails to solve the the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles.
+* Control group: 10% fails to solve the the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles. (mean = 1.5)
 * Treatment group: 0% fails to solve the first puzzle, 10% solve only 1 puzzle, 20% solve 2 puzzles, 40% solve 3 puzzles, 20% solve 4 puzzles, 10% solve 5 puzzles.
-* No correlation between any covariates on the outcome.
+* No correlation between any covariates on the outcome. (mean = 3)
 
 ```{r data generation, include=FALSE}
 
