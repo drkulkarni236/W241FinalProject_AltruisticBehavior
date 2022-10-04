@@ -45,10 +45,10 @@ For our experiment, we plan to recruit participants from Amazon mTurk to solve 1
 
 ## High effect size (1.5), high dispersion
 * Control group: 10% fails to solve the the first puzzle, 40% solve only 1 puzzle, 40% solve 2 puzzles, 10% solve 3 puzzles. (mean = 1.5)
-* Treatment group: 0% fails to solve the first puzzle, 10% solve only 1 puzzle, 20% solve 2 puzzles, 40% solve 3 puzzles, 20% solve 4 puzzles, 10% solve 5 puzzles.
-* No correlation between any covariates on the outcome. (mean = 3)
+* Treatment group: 0% fails to solve the first puzzle, 10% solve only 1 puzzle, 20% solve 2 puzzles, 40% solve 3 puzzles, 20% solve 4 puzzles, 10% solve 5 puzzles. (mean = 3)
+* No correlation between any covariates on the outcome. 
 
-```{r data generation, include=FALSE}
+```{r data generation, include=TRUE}
 
 rows <- 1000 
 
@@ -58,44 +58,53 @@ d <- data.table(id = 1:rows)
 d[ , ':='(treat = sample(c(0,1), .N, replace = TRUE))]
 
 # Create gender covariate (55% female, 40% male, 5% other)
-d[ ,  gender := sample(c('M', 'F', 'O'), size = .N, replace = TRUE, prob = c(0.55, 0.40, 0.05))]
+d[ ,  gender := sample(c('M', 'F', 'O'), size = .N, replace = TRUE, 
+                       prob = c(0.55, 0.40, 0.05))]
 
 # Create Age covariate, values from 1-5: 
 # 1 -> <20 | 2 -> 20-35 | 3 -> 36-50 | 4 -> 50-65 | 5-> >65
 # Probability estimates from the reference
-d[ ,  age := sample(c(1, 2, 3, 4, 5), size = .N, replace = TRUE, prob = c(.3, .37, .17, .11, .05))]
+d[ ,  age := sample(c(1, 2, 3, 4, 5), size = .N, replace = TRUE, 
+                    prob = c(.3, .37, .17, .11, .05))]
 
 # Create Ethnicity covariate: 
 # W -> White, B -> Black, A -> Asian, H -> Hispanic, O -> Other
 # Probability estimates from the reference
-d[ ,  ethnicity := sample(c('W', 'B', 'A', 'H', 'O'), size = .N, replace = TRUE, prob = c(.7, .07, .1, .1, .03))]
+d[ ,  ethnicity := sample(c('W', 'B', 'A', 'H', 'O'), size = .N, replace = TRUE, 
+                          prob = c(.7, .07, .1, .1, .03))]
 
 # Scenario 1
 # Create control outcomes
-d[treat == 0,  outcome_1 := sample(c(0, 1, 2), size = .N, replace = TRUE, prob = c(.1, 0.8, 0.1))]
+d[treat == 0,  outcome_1 := sample(c(0, 1, 2), size = .N, replace = TRUE, 
+                                   prob = c(.1, 0.8, 0.1))]
 
 # Create treatment outcome
-d[treat == 1,  outcome_1 := sample(c(0, 1, 2, 3), size = .N, replace = TRUE, prob = c(.1, 0.4, 0.4, 0.1))]
+d[treat == 1,  outcome_1 := sample(c(0, 1, 2, 3), size = .N, replace = TRUE, 
+                                   prob = c(.1, 0.4, 0.4, 0.1))]
 
 # Scenario 2
 # Create control outcomes
-d[treat == 0,  outcome_2 := sample(c(0, 1, 2, 3), size = .N, replace = TRUE, prob = c(.1, 0.4, 0.4, 0.1))]
+d[treat == 0,  outcome_2 := sample(c(0, 1, 2, 3), size = .N, replace = TRUE,
+                                   prob = c(.1, 0.4, 0.4, 0.1))]
 
 # Create treatment outcome
-d[treat == 1,  outcome_2 := sample(c(0, 1, 2, 3, 4), size = .N, replace = TRUE, prob = c(.1, 0.2, 0.4, 0.2, 0.1))]
+d[treat == 1,  outcome_2 := sample(c(0, 1, 2, 3, 4), size = .N, replace = TRUE, 
+                                   prob = c(.1, 0.2, 0.4, 0.2, 0.1))]
 
 # Scenario 3
 # Create control outcomes
-d[treat == 0,  outcome_3 := sample(c(0, 1, 2, 3), size = .N, replace = TRUE, prob = c(.1, 0.4, 0.4, 0.1))]
+d[treat == 0,  outcome_3 := sample(c(0, 1, 2, 3), size = .N, replace = TRUE, 
+                                   prob = c(.1, 0.4, 0.4, 0.1))]
 
 # Create treatment outcome
-d[treat == 1,  outcome_3 := sample(c(0, 1, 2, 3, 4, 5), size = .N, replace = TRUE, prob = c(0, .1, 0.2, 0.3, 0.2, 0.1))]
+d[treat == 1,  outcome_3 := sample(c(0, 1, 2, 3, 4, 5), size = .N, replace = TRUE, 
+                                   prob = c(0, .1, 0.2, 0.3, 0.2, 0.1))]
 
 ```
 
 # Statistical Power
 
-```{r many ten person samples, echo=FALSE}
+```{r many ten person samples, include=TRUE}
 
 ## you can either write a for loop, use an apply method, or use replicate 
 ## (which is an easy-of-use wrapper to an apply method)
@@ -131,11 +140,14 @@ for(sample_size in sample_sizes){
       combined_group = data.table(rbind(treatment_group, control_group))
       
       # Fit regression model and extract p-value
-      regression_p_values_1[sim] <- summary(lm(outcome_1 ~ treat, data = combined_group))$coefficients[2,4] 
+      regression_p_values_1[sim] <- summary(lm(outcome_1 ~ treat, 
+                                    data = combined_group))$coefficients[2,4] 
       
-      regression_p_values_2[sim] <- summary(lm(outcome_2 ~ treat, data = combined_group))$coefficients[2,4]
+      regression_p_values_2[sim] <- summary(lm(outcome_2 ~ treat, 
+                                    data = combined_group))$coefficients[2,4]
       
-      regression_p_values_3[sim] <- summary(lm(outcome_3 ~ treat, data = combined_group))$coefficients[2,4]
+      regression_p_values_3[sim] <- summary(lm(outcome_3 ~ treat, 
+                                    data = combined_group))$coefficients[2,4]
         
     }
   
