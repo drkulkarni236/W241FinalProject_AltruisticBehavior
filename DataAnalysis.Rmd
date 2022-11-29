@@ -36,9 +36,13 @@ nrow(d)
 d <- na.omit(d)
 nrow(d)
 
-head(d)
+# Replace 'DATA_EXPIRED' and 'CONSENT_REVOKED' values with 'Unavailable'
+d[d == 'DATA_EXPIRED'] <- 'Unavailable'
+d[d == 'CONSENT_REVOKED'] <- 'Unavailable'
 
+head(d)
 ```
+
 ```{r explore data, include=TRUE}
 
 # Split data table by treatment value
@@ -73,50 +77,68 @@ hist(d_treatment$score)
 hist(d_control$num_completed)
 hist(d_treatment$num_completed)
 ```
+
 # Regressions
 
 ```{r regressions for score outcome, include=TRUE}
 
 # Basic regression
-mod_basic <- lm(score ~ treatment, d)
+mod_basic <- lm(score ~ treatment , d)
 coeftest(mod_basic, vcov. = vcovHC(mod_basic),type='HC1')
+stargazer(mod_basic,type='text')
 
 # Second regression
 mod_sex <- lm(score ~ treatment + ethnicity, d)
-summary(mod_sex)
 coeftest(mod_sex, vcov. = vcovHC(mod_sex),type='HC1')
+stargazer(mod_sex,type='text')
+
 
 # Third regression
 mod_mult <- lm(score ~ treatment + ethnicity + sex, d)
-summary(mod_mult)
 coeftest(mod_mult, vcov. = vcovHC(mod_mult),type='HC1')
+stargazer(mod_mult,type='text')
 
 # Fourth regression (interaction term)
 mod_interaction <- lm(score ~ treatment + ethnicity + sex + ethnicity*sex, d)
-summary(mod_interaction)
+coeftest(mod_interaction, vcov. = vcovHC(mod_interaction),type='HC1')
+stargazer(mod_interaction,type='text')
     
+# Fifth regression
+mod5 <- lm(score ~ treatment + sex + treatment*sex, d)
+coeftest(mod5, vcov. = vcovHC(mod5),type='HC1')
+stargazer(mod5,type='text')
 
-
+# Sixth regression
+mod6 <- lm(score ~ treatment + ethnicity + treatment*ethnicity, d)
+coeftest(mod6, vcov. = vcovHC(mod6),type='HC1')
+stargazer(mod6,type='text')
 ```
+
+
+
 ```{r regressions for num completed outcome, include=TRUE}
 
 # Basic regression
 mod2_basic <- lm(num_completed ~ treatment, d)
 coeftest(mod2_basic, vcov. = vcovHC(mod2_basic),type='HC1')
+stargazer(mod2_basic,type='text')
 
 # Second regression
 mod2_sex <- lm(num_completed ~ treatment + ethnicity, d)
-summary(mod2_sex)
 coeftest(mod2_sex, vcov. = vcovHC(mod2_sex),type='HC1')
+stargazer(mod2_sex,type='text')
+
 
 # Third regression
 mod2_mult <- lm(num_completed ~ treatment + ethnicity + sex, d)
-summary(mod2_mult)
 coeftest(mod2_mult, vcov. = vcovHC(mod2_mult),type='HC1')
+stargazer(mod2_mult,type='text')
+
 
 # Fourth regression (interaction term)
 mod2_interaction <- lm(num_completed ~ treatment + ethnicity + sex + ethnicity*sex, d)
-summary(mod2_interaction)
+coeftest(mod2_interaction, vcov. = vcovHC(mod2_interaction),type='HC1')
+stargazer(mod2_interaction,type='text')
     
 
 
