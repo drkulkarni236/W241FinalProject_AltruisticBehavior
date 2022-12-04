@@ -34,6 +34,7 @@ head(d)
 
 
 ```
+
 ```{r explore data, include=TRUE}
 
 # Split data table by treatment value
@@ -60,7 +61,7 @@ d[, .(count = .N), by = score]
 # Treatment
 d[, .(count = .N), by = treatment]
 
-# Hist of scores
+# Hist of score
 hist(d_control$score)
 hist(d_treatment$score)
 
@@ -85,6 +86,8 @@ d <- d[ , age := as.numeric(age)]
 
 # Create accuracy column which calculates score/num_completed
 d <- d[ , accuracy := ifelse(num_completed==0,0,score/num_completed)]
+
+hist(d$accuracy)
 
 # Convert ethnicity to Asian vs non-Asian binary values
 d <- d[ , ethnicityAsian := ifelse(is.nan(ethnicity) , NaN,

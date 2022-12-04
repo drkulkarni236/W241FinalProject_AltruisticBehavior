@@ -109,15 +109,15 @@ PROLIFIC_PID,treatment,age,sex,ethnicity,score,num_completed
 5b9b4cc406114100010660f0,0,30,Male,White,1,5
 60811b4642883c028c8b2663,0,52,Female,White,4,4
 5e3dec90ce522506a9045e17,0,48,Male,Asian,3,3
-63654b4f395f847a8a5ee6fd,0,23,Male,White,4,4
+63654b4f395f847a8a5ee6fd,0,23,Male,White,4,5
 5ddae85b393bd3a44d7cbaaa,0,41,Female,Other,1,1
 5dc11777a4b6ac097d0d5ca5,0,25,Female,White,4,4
 59ac5e9f9fdf6c0001cba8bf,0,29,Male,Black,4,5
 5de90d6405263f000a4ed586,0,39,Male,White,2,3
 60db15cf0e54e22740b0f7e0,0,33,Male,White,4,4
 612e9fb57400639a88cfae33,0,27,Female,White,1,3
-615009a911243c691332e533,0,40,Male,White,3,2
-5ae7f99bd5ec5e000175f097,0,39,Male,White,4,3
+615009a911243c691332e533,0,40,Male,White,3,3
+5ae7f99bd5ec5e000175f097,0,39,Male,White,4,4
 5ea497072b246644ea12dc12,0,24,Female,White,3,4
 5d597b6debafee0001a82b53,0,27,Male,Other,2,4
 634b675e52c216918a02f17e,0,38,Prefer not to say,White,3,3
@@ -274,7 +274,7 @@ PROLIFIC_PID,treatment,age,sex,ethnicity,score,num_completed
 574b79285e549100063c292e,1,DATA_EXPIRED,Male,White,4,5
 61144d0fac78f98ad263c52a,1,20,Female,White,1,1
 627f448165ed9095fd43cfd1,1,49,Male,White,4,4
-5c2c62542c45d400014a32e6,1,28,Male,Asian,3,1
+5c2c62542c45d400014a32e6,1,28,Male,Asian,3,5
 6340ee0c1c71d2691d57fc41,1,22,Male,Other,2,3
 61194d67cf13024bcdf7c246,1,19,Male,White,5,5
 5c3630c83ce2c8000111b504,1,64,Female,White,4,5
