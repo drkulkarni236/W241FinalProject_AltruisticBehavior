@@ -212,3 +212,9 @@ stargazer(
 
 ```
 
+```{r}
+d[ num_completed == 5, .(count = .N), by = .(treatment)]
+
+chisq_test <- chisq.test(x=c(43,29), p =c(.5,.5))
+chisq_test
+```
