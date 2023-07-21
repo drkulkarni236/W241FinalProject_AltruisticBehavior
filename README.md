@@ -1,4 +1,6 @@
 # W241FinalProject
 Final project (Motivating Altruistic Behavior Through Surveys) for W241, Berkeley MIDS, Fall 2022. Group members - Ryan Wilson, Sumedh Shah, Devashish Kulkarni
 
+
+## Abstract
 We call an act altruistic when it is a sacrifice that benefits others. We aim to experimentally investigate if altruistic behavior can be motivated by outlining specific benefits for others of an act. In our experiment, we recruit participants through Prolific to solve 5 puzzles in a limited time, with a financial reward for correctly completing all the puzzles. The treatment group is provided information that outlines the benefits of the task for elementary and middle school students, while the control group is provided no such information. Outcomes are measured as the number of puzzles attempted and the accuracy (measured as the fraction of correctly completed puzzles). We found no significant effect of the treatment on the outcome variables on average, however, we observed an increased rate of completion of all 5 puzzles in the control group and an increased puzzle accuracy in the treatment group. Presumably, the perceived altruistic benefit of the task caused participants in the treatment group to take greater care in answering the puzzles, while participants in the control group were focused on completing all the puzzles for the financial reward.
