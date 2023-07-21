@@ -1,5 +1,5 @@
 # W241FinalProject
-Final project (Motivating Altruistic Behavior Through Surveys) for W241, Berkeley MIDS, Fall 2022. Group members - Ryan Wilson, Sumedh Shah, Devashish Kulkarni
+Final project (Motivating Altruistic Behavior Through Surveys) for W241, Berkeley MIDS, Fall 2022. Group members include Ryan Wilson, Sumedh Shah, and Devashish Kulkarni.
 
 
 ## Abstract
